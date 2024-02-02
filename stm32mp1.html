@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,viewport-fit=cover,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes">
+    <base href="https://kawaibutt.github.io/portfolio/">
+    <style>
+    a {
+        color: #337ab7;
+        text-decoration: none;
+    }	
+    </style>
+  </head>
+  <body>
+    <div class="site-header">
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <i class="fa fa-navicon fa-lg"></i>
+          </a>
+          <div class="trigger">
+              <a class="page-link" href="index.html">Home</a>
+              <a class="page-link" href="columns.html">Article</a>
+              <a class="page-link" href="stm32mp1.html">Linux Porting</a>
+              <a class="page-link" href="resume.html">Who am I</a>
+          </div>
+        </nav>
+    </div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <br/><br/>
+        SMT32MP1 Linux Porting 개발 일지<br/>
+        <br/><br/>
+        23년 11월 2일<br/><br/>
+        몇 년 만에 지인과 통화를 하게 되었다. STM32MP1의 emmc에 파일시스템을 올리는 작업에 대한 문의였다.<br/>
+        직접 리눅스 포팅을 했던 것은 오래되었지만, Amlogic이나 Telechips Android BSP를 봤던지라 낯설지만은 않았다.<br/>
+        타겟 보드도 없고, 빌드 환경도 없는지라. 도움이 될만한 자료 검색을 해서 링크를 전달했다.<br/>
+        <br/><br/>
+        23년 12월 15일<br/>
+        바쁜 업무가 마무리되어, 진행 사항이 궁금하여 전화를 드렸다.<br/>
+        진행이 원할하지 않다고 하여, 타겟 보드 관련 자료를 받아서 도와드리기로 했다.<br/>
+        빌드 서버 지원이 가능하냐고 문의를 했고, 별도 지원이 힘든 상황이여서, 주말에 빌드 환경을 셋팅하기로 했다.<br/>
+        <br/><br/>
+        24년 1월 3일<br/>
+        성수동에서 만나 타겟 보드를 전달받았다.<br/>
+        <br/><br/>
+        24년 1월 15일<br/>
+        빌드 환경에서 이미지를 만들고 하다보니, 노트북 용량이 부족해서 방법이 없다.<br/>
+        요즘은 10만원이 안되는 돈으로 2TB HDD를 주문했다.<br/>
+        수원에서 만나 회사 상황과 빌드 진행 사항을 공유했다.<br/>
+        <br/><br/>
+        24년 1월 17일<br/>
+        선정릉역에서 회사 대표님을 만나서 회사 비전과 현황에 대해 들을 수 있었다.<br/>
+        <br/><br/>
+        24년 1월 18일<br/>
+        Developer 패키지로 빌드를 하였다. 이제서야 빌드 환경이 갖추어졌다.<br/>
+        <br/><br/>
+        24년 1월 22일<br/>
+        타겟 보드에서 DFU와 OTP를 시도하였으나 실패하였다.<br/>
+        <br/><br/>
+        커널이 올라온 상황에서 이미지를 쓰는 것은 개인 프로젝트에서는 쓰는 방법이다.<br/>
+        생산을 위해서는 이미지를 한 번에 구워야해서, DFU와 OTP를 먼저 테스트하고자 했다.<br/>
+        <br/><br/>
+        Starter 패키지는 사전 빌드된 이미지를 굽는 방식<br/>
+        Developer 패키지는 u-boot나 kernel을 각각 빌드하여 업데이트 하는 방식<br/>
+        Distribution 패키지는 yocto로 전체 빌드하여 이미지를 만드는 방식<br/>
+        <br/><br/>
+        결국 회사에서는 Distribution 패키지로 하나의 이미지를 만들어 굽는 방식으로 가야 한다.<br/>
+        <br/><br/>
+        24년 1월 23일<br/>
+        원하는대로 되지 않으니, 회로도부터 다시 검토하기 시작한다.<br/>
+        그리고 레이아웃 자료도 요청하였다. 집에 와서 확인해보니 중간 과정의 파일을 보내왔다.<br/>
+        엉망진창이다.<br/>
+        <br/><br/>
+        24년 1월 24일<br/>
+        다시 레이아웃 자료를 받으니 이젠 정상인 듯 하다.<br/>
+        다른 약속이 있어, 오후 반차를 냈다. 저녁 약속이니 몇 시간 동안 작업을 하였다.<br/>
+        드디어 DFU는 성공하였다. 하지만 여전히 OTP는 읽혀지지 않는다.<br/>
+        일단 디바이스 트리를 맞춰서, bring up을 하고 다시 봐야겠다.<br/>
+        <br/><br/>
+        24년 1월 26일<br/>
+        Yocto에서 신규 레이어를 추가하고, 빌드를 시작했는데 실패했다.<br/>
+        <br/><br/>
+        24년 1월 29일<br/>
+        디바이스 트리를 STM32CubeMX에서 만들어서 넣었는데, 실패했다.<br/>
+        수작업으로 정의해야 하는 부분이 있다고 한다.<br/>
+        <br/><br/>
+        24년 1월 30일<br/>
+        user sections을 넣어주고서, 드디어 빌드에 성공했다.<br/>
+        그러나 타겟에 올리니, 제대로 동작하지 않는다.<br/>
+        <br/><br/>
+        24년 1월 31일<br/>
+        clock을 맞추고 나니, u-boot가 동작하는 것을 확인하였다.<br/>
+        <br/><br/>
+        24년 2월 1일<br/>
+        디바이스 트리를 다시 정리하고, sd card로 구웠을 때, 커널까지 올라오는 것을 확인하였다.<br/>
+        하지만 emmc로 올리면, 커널이 올라가다가 멈춘다.<br/>
+        1차 bring up은 된 것으로 보고, 이제 menuconfig로 설정값들을 바꿔봐야겠다.<br/>
+        <br/><br/>
+
+
+    </div>
+    </div>
+
+    <div class="footer center">
+        Copyright &copy; <a href="https://kawaibutt.github.io" target="_blank">kawaibutt</a> 2019<BR />
+    </div>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
