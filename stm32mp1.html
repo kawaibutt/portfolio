@@ -12,19 +12,7 @@
     </style>
   </head>
   <body>
-    <div class="site-header">
-        <nav class="site-nav">
-          <a href="#" class="menu-icon">
-            <i class="fa fa-navicon fa-lg"></i>
-          </a>
-          <div class="trigger">
-              <a class="page-link" href="index.html">Home</a>
-              <a class="page-link" href="columns.html">Article</a>
-              <a class="page-link" href="stm32mp1.html">Linux Porting</a>
-              <a class="page-link" href="resume.html">Who am I</a>
-          </div>
-        </nav>
-    </div>
+    <div data-include-path="header.html"></div>
 
     <div class="page-content">
       <div class="wrapper">
@@ -106,12 +94,30 @@
         양산용 이미지 패키징 문제<br/>
         <br/><br/>
         
-    </div>
+      </div>
     </div>
 
-    <div class="footer center">
-        Copyright &copy; <a href="https://kawaibutt.github.io" target="_blank">kawaibutt</a> 2019<BR />
-    </div>
+    <div data-include-path="footer.html"></div>
+
+    <script>
+      window.addEventListener('load', function() {
+        var allElements = document.getElementsByTagName('*');
+        Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+              if (this.readyState == 4) {
+                if (this.status == 200) {el.outerHTML = this.responseText;}
+                if (this.status == 404) {el.innerHTML = "Page not found.";}
+              }
+            };
+            xhttp.open('GET', includePath, true);
+            xhttp.send();
+          }
+        });
+      });
+    </script>
   </body>
 </html>
 
